@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% csrf_token %}
+
+
+{% block content %}
+
+<div id="regplace">
+  <p class="postTitle">Authorization</p>
+    <form id="regcontent" action="{% url 'authorization' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="Confirm" type="submit" value="Confirm">
+    </form>
+</div>
+{% endblock %}

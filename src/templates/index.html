@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Blog</title>
+    <link type = "text/css" rel = "stylesheet" href = "{% static "styles.css" %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div class="HomeButton">
+        <a id="Domik" href="/">Blog</a>
+      </div>
+
+      <div id="headerNav">
+        {% if is_admin %}
+        <a class="haederbuttons"  href="/admin">admin</a>
+        {%endif%}
+
+        {% if is_authenticated %}
+        <a class="haederbuttons" href="{% url 'logout' %}">log out</a>
+        {% else %}
+        <a class="haederbuttons" href={% url 'registration' %}>sign up</a>
+        <a class="haederbuttons" href={% url 'authorization'%}>sign in</a>
+        {%endif%}
+
+      </div>
+      
+    </header>
+    {% block content %}{% endblock %}
+  </body>
+</html>

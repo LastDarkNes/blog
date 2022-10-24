@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <div class="post">
+      <div class="postTitle">
+        <p> {{ post.title }} <br>  </p>
+      </div>
+      <p class="description" >
+        {{ post.description }}
+      </p>
+      {% if post.image %}
+      <img src="{{ MEDIA_URL }}{{ i.image.url }}" alt="debug" >
+      {% endif %}
+    <h6 class="data">{{ post.date }} &nbsp;&nbsp;&nbsp;&nbsp; Category:{{ post.category }}</h6>
+
+      <div class="comments">
+          <p>Comments:</p>
+      {% if is_authenticated or is_admin %}
+      <details>
+          <summary> <h5>Leave comment: </h5></summary>
+        <div class="commentForm">
+            <form  action="{% url 'single_post' post.pk%}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="Confirm" type="submit" value="Confirm">
+            </form>
+
+      </details>
+      {% endif %}
+          <details>
+              <summary><h5>Show comments:</h5></summary>
+              {% for comment in post.get_comments%}
+              <div class="comment">
+                  <h3>{{ comment.author.username }}</h3>
+                  <h5>{{ comment.text}}            <h6>{{comment.date}}</h6></h5>
+              </div>
+              {% endfor %}
+          </details>
+      </div>
+  </div>
+
+
+{% endblock %}

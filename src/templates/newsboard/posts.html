@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  {% for post in posts %}
+  <div class="post">
+      <div class="postTitle">
+        <a href="{{ post.get_absolute_url }}"> {{ post.title }} <br>  </a>
+      </div>
+      <p class="description" >
+        {{ post.description }}
+      </p>
+      {% if post.image %}
+      <img src="{{ MEDIA_URL }}{{ i.image.url }}" alt="debug" >
+      {% endif %}
+    <h6 class="data">{{ post.date }} &nbsp;&nbsp;&nbsp;&nbsp; Category:{{ post.category }}</h6>
+
+
+  </div>
+
+  {% endfor %}
+    <footer>
+        <a href="{% url 'newsboard'%}"> 1 </a>
+        {% if number_of_pages != None %}
+            {% for page_number in number_of_pages %}
+                <a href="{% url 'newsboard' page_number %}">{{ page_number }}</a>
+            {% endfor %}
+        {% endif %}
+    </footer>
+{% endblock %}
